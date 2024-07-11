@@ -1,0 +1,207 @@
+{% extends "layout.html" %}
+{% block content %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Module 2 - Node Generation</title>
+    <!-- BOOTSTRAP 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
+    <!-- JQUERY -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- PLOTLY -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="module2-container">
+        <br>
+        <h2 class="text-center">Reinforced concrete frame capacity curve generator</h2>
+        <p class="text-center" style="margin: 20px 350px 30px 350px;">The frame generator requires specific input parameters to create the model and, consequently, the capacity curve.
+            As you input the data, the model will be constructed accordingly.</p>
+    </div>
+    <div class="container" style="max-width: 1200px;">
+        <div class="row">
+            <!-- Form Column -->
+            <div class="col-lg-6">
+                <!-- Step 1: Enter Coordinates -->
+                <div id="step1">
+                    <div class="d-flex align-items-center">
+                        <div class="module2-container-title">
+                            <img src="/static/step1.png" alt="logo_modulo1" width="70" height="70">
+                        </div>
+                        <h3 class="card-title">Generate nodes</h3>
+                    </div>
+                    <div class="text-container-module2">
+                        <span class="text-secondary">Enter the 'x' and 'y' coordinates of the nodes in your model; you can input as many coordinates as you need.</span>
+                        <span class="text-secondary">Coordinates should be entered as a positive integer or decimal number (using periods).</span>
+                        <p class="text-secondary">Please ensure that the model uses length units in meters.</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-11">
+                            <!-- Input X Coordinates -->
+                            <div id="inputFormRowxloc">
+                                <div class="input-group mb-3">
+                                    <input id="valdex" pattern="^[0-9]+(\.[0-9]+)?$" name="valoresxloc" class="form-control m-input" placeholder="Enter the x-coordinate" autocomplete="off">
+                                </div>
+                            </div>
+                            <div id="newRowxloc"></div>
+                            <button style="border: none; padding: 10px 20px; border-radius: 10px; background-color: #62764E; color:white; margin-top: -12px;" id="addRowxloc" type="button" class="btn btn-info">Add</button>
+                            <!-- Input Y Coordinates -->
+                            <div id="inputFormRowyloc">
+                                <br>
+                                <div class="input-group mb-3">
+                                    <input id="valdey" pattern="^[0-9]+(\.[0-9]+)?$" name="valoresyloc" class="form-control m-input" placeholder="Enter the y-coordinate" autocomplete="off">
+                                </div>
+                            </div>
+                            <div id="newRowyloc"></div>
+                            <button style="border: none; padding: 10px 20px; border-radius: 10px; background-color: #62764E; color:white; margin-top: -12px;" id="addRowyloc" type="button" class="btn btn-info">Add</button>
+                        </div>
+                    </div>
+                    <button id="generateNodes" type="button" class="btn btn-dark mt-3" disabled>GENERATE NODES</button>
+                    <button id="nextStep1" type="button" class="btn btn-secondary mt-3">Next step</button>
+                </div>
+            </div>
+            <!-- Graph Column -->
+            <div class="col-lg-6">
+                <div id="nodesGraph" style="height: 500px;"></div>
+            </div>
+        </div>
+        <!-- Step 2: Display Nodes -->
+        <div id="step2" style="display: none;">
+            <h3 class="text-secondary">Generated Nodes</h3>
+            <div id="nodesGraph"></div>
+            <button id="nextStep2" type="button" class="btn btn-secondary mt-3">Next step</button>
+        </div>
+    </div>
+    <br>
+    <br>
+    <!--   ----------------------------------------------------------------------------------------   -->
+    <!--   ---------------------------------   CONTENEDOR FOOTER   --------------------------------   -->
+    <footer class="footer-container container-fluid bg-dark text-white py-4">
+        <div class="row">
+            <div class="col-md-6">
+                <br>
+                <h5>Developed by Daniela Novoa Ramirez</h5>
+                <p>Moral rights reserved to Daniela Novoa Ramirez.</p>
+                <p>Contact me:</p>
+                <a href="https://www.linkedin.com/in/daniela-novoa-ramírez-765b07232" class="text-white me-3">
+                    <img src="/static/linkedin.png" alt="LinkedIn" width="20" height="20">
+                </a>
+                <a href="https://github.com/DanielaNovoa15" class="text-white me-3">
+                    <img src="/static/github.png" alt="GitHub" width="35.5" height="20">
+                </a>
+                <a href="mailto:danielanora@unisabana.edu.co" class="text-white">
+                    <img src="/static/scholar.png" alt="Email" width="18" height="20">
+                </a>
+                <a href="mailto:danielanora@unisabana.edu.co" class="text-white">
+                    <img src="/static/email.png" alt="Email" width="20" height="20">
+                </a>
+            </div>
+            <div class="col-md-6 text-end">
+                <img src="/static/Sabana.png" alt="Logo_Sabana" width="170" height="50" class="full-width">
+                <p>Patrimonial rights reserved to Universidad de La Sabana.</p>
+                <p>Contact with the university:</p>
+                <a href="https://www.facebook.com/p/Facultad-de-Ingenier%C3%ADa-Unisabana-100064599707500/?_rdr" class="text-white me-3">
+                    <img src="/static/facebook.png" alt="Facebook" width="20" height="20">
+                </a>
+                <a href="https://www.instagram.com/ingenieriaunisabana/" class="text-white">
+                    <img src="/static/instagram.png" alt="Instagram" width="20" height="20">
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script type="text/javascript">
+        function toggleGenerateButton() {
+            var xFilled = $("input[name='valoresxloc']").filter(function() { return this.value.trim() !== ""; }).length > 0;
+            var yFilled = $("input[name='valoresyloc']").filter(function() { return this.value.trim() !== ""; }).length > 0;
+            $("#generateNodes").prop("disabled", !(xFilled && yFilled));
+        }
+
+        $(document).on('input', "input[name='valoresxloc'], input[name='valoresyloc']", function() {
+            toggleGenerateButton();
+        });
+
+        // Add X coordinate input
+        $("#addRowxloc").click(function () {
+            var html = '';
+            html += '<div id="inputFormRowxloc">';
+            html += '<div class="input-group mb-3">';
+            html += '<input name="valoresxloc" class="form-control m-input" placeholder="Enter the x-coordinate" autocomplete="off">';
+            html += '<div class="input-group-append">';
+            html += '<button id="removeRowxloc" type="button" style="border: none; padding: 8px 12px; border-radius: 10px; background-color: #B44236; color:white;" class="btn btn-danger">Delete</button>';
+            html += '</div>';
+            html += '</div>';
+            $('#newRowxloc').append(html);
+        });
+
+        // Remove X coordinate input
+        $(document).on('click', '#removeRowxloc', function () {
+            $(this).closest('#inputFormRowxloc').remove();
+            toggleGenerateButton();
+        });
+
+        // Add Y coordinate input
+        $("#addRowyloc").click(function () {
+            var html = '';
+            html += '<div id="inputFormRowyloc">';
+            html += '<div class="input-group mb-3">';
+            html += '<input name="valoresyloc" class="form-control m-input" placeholder="Enter the y-coordinate" autocomplete="off">';
+            html += '<div class="input-group-append">';
+            html += '<button id="removeRowyloc" type="button" style="border: none; padding: 8px 12px; border-radius: 10px; background-color: #B44236; color:white;" class="btn btn-danger">Delete</button>';
+            html += '</div>';
+            html += '</div>';
+            $('#newRowyloc').append(html);
+        });
+
+        // Remove Y coordinate input
+        $(document).on('click', '#removeRowyloc', function () {
+            $(this).closest('#inputFormRowyloc').remove();
+            toggleGenerateButton();
+        });
+
+        // Handle generate nodes button click
+        $("#generateNodes").click(function () {
+            // Collect coordinates
+            var xCoords = [];
+            var yCoords = [];
+            $("input[name='valoresxloc']").each(function () {
+                xCoords.push(parseFloat($(this).val()));
+            });
+            $("input[name='valoresyloc']").each(function () {
+                yCoords.push(parseFloat($(this).val()));
+            });
+
+            // Send coordinates to the server to generate nodes and graph
+            $.ajax({
+                url: "/generate_nodes",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({x: xCoords, y: yCoords}),
+                success: function (data) {
+                    // Display the generated nodes graph
+                    $("#nodesGraph").html('<img src="data:image/png;base64,' + data.image + '" alt="Nodes Graph">');
+                    // Enable next step button
+                    $("#nextStep1").prop("disabled", false);
+                }
+            });
+        });
+
+
+        // Handle next step button click for step 1
+        $("#nextStep1").click(function () {
+            if (confirm("Once you proceed, you will not be able to modify the coordinates of the nodes. Do you want to continue?")) {
+                window.location.href = "/step2";
+            }
+        });
+
+    </script>
+</body>
+</html>
+
+{% endblock %}
