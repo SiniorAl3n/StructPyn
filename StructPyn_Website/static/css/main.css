@@ -1,0 +1,382 @@
+header{
+    background-color:#13272C;
+    text-emphasis-color: #fff;
+}
+.my-button {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #13272C;
+    color: white;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+  }
+  
+.input-container input[type="text"] {
+    margin-right: 10px;
+  }
+
+/* ------------------------------------------------------------------------------------------------ */
+/* --------------------------------- Modificar barra de navegación -------------------------------- */
+/* ------------------------------------------------------------------------------------------------ */
+
+/* Añadir tipo de fuente */
+@font-face {
+  font-family: 'Abadi'; /* Nombre de la fuente */
+  src: url('abadi-mt.ttf') format('truetype'); /* Ruta al archivo de fuente TTF */
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ADLaMDisplay'; /* Nombre de la fuente */
+  src: url('ADLaMDisplay-Regular.ttf') format('truetype'); /* Ruta al archivo de fuente TTF */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Aptos'; /* Nombre de la fuente */
+  src: url('aptos.ttf') format('truetype'); /* Ruta al archivo de fuente TTF */
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Personaliza el menú de navegación */
+.navbar-nav {
+  display: flex;
+  justify-content: center; /* Centra los elementos del menú horizontalmente */
+  align-items: center; /* Centra los elementos del menú verticalmente */
+  height: 100%; /* Asegura que el menú ocupe toda la altura de la franja de navegación */
+}
+.navbar-nav .nav-item {
+  margin-right: 200px; /* Espacio entre elementos del menú */
+  margin-left: -160px;
+}
+
+.navbar-nav .nav-item:last-child {
+  margin-right: 100px; /* Elimina el margen derecho del último elemento del menú */
+  margin-left: -160px; /* Elimina el margen derecho del último elemento del menú */
+}
+
+.navbar-nav .nav-item a.nav-link {
+  font-size: 21px; /* Cambia el tamaño de fuente */
+  color: #D9D9D9; /* Cambia el color de fuente */
+  font-family: "Aptos";
+  font-weight: bold;
+}
+
+/* Personaliza el logo 3P */
+.navbar-brand img{
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  height: 100%; /* Asegura que el menú ocupe toda la altura de la franja de navegación */
+}
+
+/* Agregar margen derecho si es necesario */
+.navbar-brand img {
+  margin-left: 190px;
+}
+
+/* Modifica el ancho del contenedor */
+.custom-container {
+  max-width: 1400px; /* Ancho de la barra de navegacion */
+}
+/* Modifica la altura de la barra de navegación */
+.navbar {
+  height: 100px; /* Altura de la barra de navegacion */
+}
+/* Centra verticalmente el contenido de la barra de navegación (opcional) */
+.navbar-brand,
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
+/* ------------------------------------------------------------------------------------------------ */
+/* ------------------------------------ Modificar pestana HOME ------------------------------------ */
+/* ------------------------------------------------------------------------------------------------ */
+
+/* Estilo para el contenedor principal */
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 140px;
+  background-color: #FFFFFF;
+  height: 65vh; /* Ocupa toda la altura de la ventana */
+}
+
+.text-container {
+  flex: 1;
+  max-width: 50%; /* Máximo 50% del ancho */
+  padding: 20px;
+}
+
+.text-container h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.text-container p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.text-container a {
+  border: none;
+  background-color: #13272C;
+  font-size: 1rem;
+  padding: 10px 20px;
+}
+
+.logo-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 50%; /* Máximo 50% del ancho */
+  padding: 20px;
+}
+
+.full-width {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Media query para dispositivos móviles */
+@media (max-width: 768px) {
+  .main-container {
+      flex-direction: column;
+  }
+
+  .text-container, .logo-container {
+      max-width: 100%; /* 100% del ancho en móviles */
+  }
+
+  .logo-container {
+      margin-top: 20px;
+  }
+}
+
+/* ------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------------------------------------ */
+/* ---------------------------------- Modificar Logo de la Sabana --------------------------------- */
+/* ------------------------------------------------------------------------------------------------ */
+
+/* Estilo para la franja */
+.logosabana-banner {
+  height: 10vh;
+  background-color: #13272C; /* Color de fondo de la franja */
+  display: flex;
+  padding: 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+.nada-banner {
+  height: 5vh;
+  background-color: #13272C; /* Color de fondo de la franja */
+  display: flex;
+  padding: 12px;
+  justify-content: center;
+  align-items: center;
+}
+/* ------------------------------------------------------------------------------------------------ */
+/* -------------------------------------------- Modulos ------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------ */
+
+/* Estilo para las tarjetas de módulos */
+.modules-container {
+  padding: 40px 20px;
+}
+
+.modules-container .card {
+  margin: 30px 0;
+}
+
+.modules-container .card-title {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.modules-container .card-text {
+  font-size: 1rem;
+}
+
+.modules-container a{
+  border: none;
+  background-color: #13272C;
+}
+
+.module1-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 0%; /* Máximo 50% del ancho */
+  padding: 5px 35px;
+}
+
+/* ------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------ Flowchart ------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------ */
+
+/* Estilo para la sección del flowchart */
+.flowchart-container {
+  padding: 40px 20px;
+}
+
+.flowchart-container p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.flowchart-container .text-success {
+  color: #28a745;
+}
+
+.flowchart-container .btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+  padding: 10px 20px;
+  font-size: 1rem;
+}
+
+.usermanual-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 50%; /* Máximo 50% del ancho */
+  padding: 0px;
+}
+
+/* ------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------ */
+
+/* Estilo para el footer */
+.footer-container {
+  padding: 280px;
+  background-color: #343a40; /* Color de fondo oscuro */
+  color: #ffffff; /* Texto blanco */
+}
+
+.footer-container h5 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.footer-container p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.footer-container a {
+  color: #ffffff; /* Enlaces blancos */
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+.footer-container a:hover {
+  text-decoration: underline;
+}
+
+.sabanafooter-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 67%; /* Máximo 50% del ancho */
+  padding: 15px 50px;
+}
+
+.footernew-container {
+  flex: 1;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  max-width: 80%; /* Máximo 50% del ancho */
+  padding: 0px 72px;
+}
+
+/* ------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------ */
+
+/* Estilo para el contenedor principal */
+
+.module2-container {
+  padding: 20px;
+  background-color: #F2F2F2; /* Color de fondo oscuro */
+  color: #13272C; /* Texto blanco */
+}
+
+
+.module2-container-title {
+  flex: 1;
+  display: flex;
+  justify-content: right;
+  max-width: 0%; /* Máximo 50% del ancho */
+  padding: 20px 15px;
+}
+
+.text-container-module2 {
+  flex: 1;
+  max-width: 90%; /* Máximo 50% del ancho */
+  padding: 8px 0px;
+}
+
+.text-container-module1 {
+  flex: 1;
+  max-width: 100%; /* Máximo 50% del ancho */
+  padding: 8px 0px;
+}
+
+.text-container-module1 p {
+  padding: 20px 0px;
+}
+
+.text-container-module1 ul {
+  padding: 0px 45px;
+}
+
+.text-container-module1 .card-text {
+  font-size: 1rem;
+}
+
+.text-container-module2 p {
+  padding: 20px 0px;
+}
+
+.container-generate_nodes {
+  margin-top: 50px;
+}
+
+h3.text-secondary {
+  margin-top: 20px;
+}
+
+.input-group-append {
+  display: flex;
+  align-items: center;
+}
+
+.btn-info {
+  margin-top: 10px;
+}
+
+.btn-dark {
+  margin-top: 20px;
+}
+
+#nodesGraph img {
+  max-width: 100%;
+}

@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+{% block content %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Module 2 - Node Generation</title>
+    <!-- BOOTSTRAP 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
+    <!-- JQUERY -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- PLOTLY -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="module2-container">
+        <br>
+        <h2 class="text-center">Structpyn documentation</h2>
+        <p class="text-center" style="margin: 0px 350px 30px 350px;">Learn more about StructPyn, its motivations and scope</p>
+    </div>
+    <div class="container" style="max-width: 1000px;">
+        <br>
+        <br>
+        <h3 class="card-title">Introduction to StructyPyn</h3>
+        <div class="text-container-module1">
+            <span class="text-secondary">Welcome to StructPyn, a web platform dedicated to generating capacity curves for reinforced concrete moment-resisting frame (RCMRF) buildings. 
+                StructPyn is a fully web-based platform, designed to be free to use, allowing engineers and construction professionals to easily evaluate the seismic performance of reinforced concrete structures.</span>
+        </div>
+        <br>
+        <h4 class="card-title">Context, Motivation, and Scope of StructPyn</h4>
+        <div class="text-container-module1">
+            <span class="text-secondary">Reinforced concrete frames (RCFs) are a globally prevalent and versatile structural system, known for their cost-effectiveness and adaptability. 
+                Reinforced concrete construction is fundamental in both developing and industrialized countries, highlighting its crucial role in modern building design and construction. 
+                However, its extensive use presents significant challenges, especially in regions without seismic design expertise. 
+                Understanding the seismic performance of these structures is vital to identify potential deficiencies and improve their seismic resilience.</span>
+            <p class="text-secondary">In this regard, StructPyn can be highly useful in various engineering fields, such as:</p>
+            <ul>
+                <li class="text-secondary">Structural Design: Integrating capacity curve evaluation into the common structural design process, ensuring that new constructions meet seismic standards.</li>
+                <li class="text-secondary">Seismic Assessment: Facilitating the seismic evaluation of existing structures, identifying areas for improvement to enhance their seismic resilience.</li>
+                <li class="text-secondary">Research: Supporting research on the seismic behavior of reinforced concrete structures, providing an accessible tool for creating and analyzing nonlinear models.</li>
+                <li class="text-secondary">Education: Serving as an educational resource for students and professionals who want to learn and apply advanced structural analysis methods.</li>
+            </ul>
+            <span class="text-secondary">With StructPyn, we aim to contribute to the advancement of knowledge and practice in the design and evaluation of reinforced concrete structures, promoting safer and more resilient construction against earthquakes.</span>
+        </div>
+        <br>
+        <h4 class="card-title">Numerical Considerations for 2D Models</h4>
+        <div class="text-container-module1">
+            <span class="text-secondary">In our platform, the OpenSeesPy software is used for nonlinear evaluation of structures.
+                 OpenSeesPy's capabilities facilitate the creation of 2D models that consider inelastic behaviors, essential for understanding structural response under seismic loads. 
+                 Structural elements, such as beams and columns, are modeled using fiber elements to accurately capture the distribution of stresses and deformations.</span>
+            <ul class="text-secondary"></ul>
+            <ul>
+                <li class="text-secondary">Beam and Column Elements: ForceBeamColumn elements with a five-point Gauss-Lobatto integration scheme are used.</li>
+                <li class="text-secondary">Rigid Diaphragms: Rigid diaphragms are assumed at each floor level using the "equalDOF" command.</li>
+                <li class="text-secondary">Concrete Modeling: Concrete is classified as confined and unconfined, according to Mander's model. Both types are modeled as uniaxial material "Concrete01".</li>
+                <li class="text-secondary">Regularization: A regularization technique based on constant fracture energy is applied.</li>
+                <li class="text-secondary">Steel Reinforcement: Steel reinforcement is represented using the hysteretic uniaxial material, with specific properties for commercially available steel in Colombia. The "MinMax" command is used to specify deformation limits of the reinforcement, considering low-cycle fatigue.</li>
+            </ul>
+        </div>
+        <br>
+        <h4 class="card-title">Pushover Analysis and Element Generation Functions</h4>
+        <div class="text-container-module1">
+            <span class="text-secondary">All analyses and functions used in the modeling process have been developed by Orlando Arrayo and his team, of which we are proudly a part. 
+                You can explore more of our work and contributions on GitHub.</span>
+        <br>
+        <br>
+        <br>
+        <h4 class="card-title">Demonstration Video</h4>
+        <div class="text-container-module1">
+            <span class="text-secondary">For a better understanding of how models are generated on our platform, we invite you to watch the following demonstration video:</span>
+        </div>
+    </div>
+</body>
+</html>
+
+{% endblock %}

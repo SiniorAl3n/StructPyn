@@ -1,0 +1,298 @@
+{% extends "layout.html" %}
+{% block content %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Module 2 - Node Generation</title>
+    <!-- BOOTSTRAP 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
+    <!-- JQUERY -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- PLOTLY -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="module2-container">
+        <br>
+        <h2 class="text-center">Reinforced concrete frame capacity curve generator</h2>
+        <p class="text-center" style="margin: 20px 350px 30px 350px;">The frame generator requires specific input parameters to create the model and, consequently, the capacity curve.
+            As you input the data, the model will be constructed accordingly.</p>
+    </div>
+    <div class="container" style="max-width: 1200px;">
+        <div class="row">
+            <!-- Form Column -->
+            <div class="col-lg-6">
+                <div id="step5">
+                    <div class="d-flex align-items-center">
+                        <div class="module2-container-title">
+                            <img src="/static/step5.png" alt="logo_modulo2" width="70" height="70">
+                        </div>
+                        <h3 class="card-title">Define column section</h3>
+                    </div>
+                    <div class="text-container-module2">
+                        <span class="text-secondary">Enter the base, height, and cover of the section in meters.</span>
+                        <span class="text-secondary">Also, input the steel configuration for the section as instructed.</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-11">
+                            <form id="step5Form">
+                                <div class="mb-3">
+                                    <input type="text" pattern="^[0-9]+(\.[0-9]+)?$"  name ="valBsec" id="valBsec" class="form-control m-input" placeholder="Specify the section base" autocomplete="off">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" pattern="^[0-9]+(\.[0-9]+)?$" name ="valHsec" id="valHsec" class="form-control m-input" placeholder="Specify the section height" autocomplete="off">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" pattern="^[0-9]+(\.[0-9]+)?$" name ="valRsec" id="valRsec" class="form-control m-input" placeholder="specify the section coating" autocomplete="off">
+                                </div>
+                                <p class="text-secondary">Enter the quantity of "Middle" bars and the number of bars.</p>
+                                <div class="input-container">
+                                    <input type="text" name ="cbarMdd" pattern="[1-9]\d*"class="form-control m-input" id="cbarMdd" placeholder="Quantity of bars">
+                                    <select id="nbarMdd"  name ="nbarMdd" onchange="mostrarSeleccion()" class="form-control m-input">
+                                        <option value="barnum3">#3</option>
+                                        <option value="barnum4">#4</option>
+                                        <option value="barnum5">#5</option>
+                                        <option value="barnum6">#6</option>
+                                        <option value="barnum7">#7</option>
+                                        <option value="barnum8">#8</option>
+                                    </select>
+                                </div>
+                                <br>
+                                <p class="text-secondary">Enter the quantity of "Top" bars and the number of bars.</p>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <!------------------------- INGRESAR NUMERO DE BARRAS TOP (SOLO SE INGRESAN 3) ------------------------->
+                                        <div id="inputFormRowTop">
+                                            <div class="input-group mb-3">
+                                                <div class="input-container">
+                                                    <input type="text" name ="cbarTop" pattern="[1-9]\d*"class="form-control m-input" id="cbarTop" placeholder="Quantity of bars">
+                                                    <select id="nbarTop" name ="nbarTop" onchange="mostrarSeleccion()" class="form-control m-input">
+                                                        <option value="barnum3">#3</option>
+                                                        <option value="barnum4">#4</option>
+                                                        <option value="barnum5">#5</option>
+                                                        <option value="barnum6">#6</option>
+                                                        <option value="barnum7">#7</option>
+                                                        <option value="barnum8">#8</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="newRowTop"></div>
+                                        <button style="border: none; padding: 10px 20px; border-radius: 10px; background-color: #62764E; color:white; margin-top: -12px;" id="addRowTop" type="button" class="btn btn-info">Add</button>
+                                        <br>
+                                        <br>
+                                        <p class="text-secondary">Enter the quantity of "Bottom" bars and the number of bars.</p>
+                                        <!----------------------- INGRESAR NUMERO DE BARRAS BOTTOM (SOLO SE INGRESAN 3) ------------------------>
+                                        <div id="inputFormRowBtt">
+                                            <div class="input-group mb-3">
+                                                <div class="input-container">
+                                                    <input type="text" name ="cbarBtt" pattern="[1-9]\d*"class="form-control m-input" id="cbarBtt" placeholder="Quantity of bars">
+                                                    <select id="nbarBtt" name ="nbarBtt" onchange="mostrarSeleccion()" class="form-control m-input">
+                                                        <option value="barnum3">#3</option>
+                                                        <option value="barnum4">#4</option>
+                                                        <option value="barnum5">#5</option>
+                                                        <option value="barnum6">#6</option>
+                                                        <option value="barnum7">#7</option>
+                                                        <option value="barnum8">#8</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="newRowBtt"></div>
+                                        <button style="border: none; padding: 10px 20px; border-radius: 10px; background-color: #62764E; color:white; margin-top: -12px;" id="addRowBtt" type="button" class="btn btn-info">Add</button>
+                                    </div>
+                                </div>     
+                            </form>
+                        </div>
+                    </div>
+                    <button id="generateSection" type="button" class="btn btn-dark mt-3" disabled>GENERATE SECTION</button>
+                    <button id="nextStep5" type="button" class="btn btn-secondary mt-3">Next step</button>
+                </div>
+            </div>
+            <!-- Graph Column -->
+            <div class="col-lg-6">
+                <div id="sectionGraph" style="height: 500px;"></div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <!--   ----------------------------------------------------------------------------------------   -->
+    <!--   ---------------------------------   CONTENEDOR FOOTER   --------------------------------   -->
+    <footer class="footer-container container-fluid bg-dark text-white py-4">
+        <div class="row">
+            <div class="col-md-6">
+                <br>
+                <h5>Developed by Daniela Novoa Ramirez</h5>
+                <p>Moral rights reserved to Daniela Novoa Ramirez.</p>
+                <p>Contact me:</p>
+                <a href="https://www.linkedin.com/in/daniela-novoa-ramírez-765b07232" class="text-white me-3">
+                    <img src="/static/linkedin.png" alt="LinkedIn" width="20" height="20">
+                </a>
+                <a href="https://github.com/DanielaNovoa15" class="text-white me-3">
+                    <img src="/static/github.png" alt="GitHub" width="35.5" height="20">
+                </a>
+                <a href="mailto:danielanora@unisabana.edu.co" class="text-white">
+                    <img src="/static/scholar.png" alt="Email" width="18" height="20">
+                </a>
+                <a href="mailto:danielanora@unisabana.edu.co" class="text-white">
+                    <img src="/static/email.png" alt="Email" width="20" height="20">
+                </a>
+            </div>
+            <div class="col-md-6 text-end">
+                <img src="/static/Sabana.png" alt="Logo_Sabana" width="170" height="50" class="full-width">
+                <p>Patrimonial rights reserved to Universidad de La Sabana.</p>
+                <p>Contact with the university:</p>
+                <a href="https://www.facebook.com/p/Facultad-de-Ingenier%C3%ADa-Unisabana-100064599707500/?_rdr" class="text-white me-3">
+                    <img src="/static/facebook.png" alt="Facebook" width="20" height="20">
+                </a>
+                <a href="https://www.instagram.com/ingenieriaunisabana/" class="text-white">
+                    <img src="/static/instagram.png" alt="Instagram" width="20" height="20">
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript">
+        function toggleGenerateButton() {
+            var Bsec = $("#valBsec").val().trim() !== "";
+            var Hsec = $("#valHsec").val().trim() !== "";
+            var Rsec = $("#valRsec").val().trim() !== "";
+            var cbarMdd = $("#cbarMdd").val().trim() !== "";
+            var nbarMdd = $("#nbarMdd").val().trim() !== "";
+            var cbarTop = $("input[name='cbarTop']").filter(function() { return this.value.trim() !== ""; }).length > 0;
+            var nbarTop = $("select[name='nbarTop']").filter(function() { return this.value.trim() !== ""; }).length > 0;
+            var cbarBtt = $("input[name='cbarBtt']").filter(function() { return this.value.trim() !== ""; }).length > 0;
+            var nbarBtt = $("select[name='nbarBtt']").filter(function() { return this.value.trim() !== ""; }).length > 0;
+            $("#generateSection").prop("disabled", !(Bsec && Hsec && Rsec && cbarMdd && nbarMdd && cbarTop && nbarTop && cbarBtt && nbarBtt));
+        }
+
+        $(document).on('input', "#valBsec, #valHsec, #valRsec, #cbarMdd, #nbarMdd, input[name='cbarTop'], select[name='nbarTop'], input[name='cbarBtt'], select[name='nbarBtt']", function() {
+            toggleGenerateButton();
+        });
+
+        $("#generateSection").click(function () {
+            // Gather form data
+            var formData = {
+                valBsec: $("#valBsec").val(),
+                valHsec: $("#valHsec").val(),
+                valRsec: $("#valRsec").val(),
+                cbarMdd: $("#cbarMdd").val(),
+                nbarMdd: $("#nbarMdd").val(),
+                cbarTop: $("input[name='cbarTop']").map(function(){return $(this).val();}).get(),
+                nbarTop: $("select[name='nbarTop']").map(function(){return $(this).val();}).get(),
+                cbarBtt: $("input[name='cbarBtt']").map(function(){return $(this).val();}).get(),
+                nbarBtt: $("select[name='nbarBtt']").map(function(){return $(this).val();}).get(),
+            };
+
+            // Send data to the server to generate the section
+            $.ajax({
+                url: "/step3",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(formData),
+                success: function (response) {
+                    // Display the generated section graph
+                    var image = response.image;
+                    var imgElement = '<img src="data:image/png;base64,' + image + '" alt="Section Graph">';
+                    $("#sectionGraph").html(imgElement);
+                    $("#nextStep5").prop("disabled", false);
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            var maxInputs = 1; // Número máximo de inputs permitidos
+            
+            // Agregar Input para barras Top
+            $("#addRowTop").click(function () {
+                var inputCount = $("#newRowTop .input-group").length;
+                
+                if (inputCount >= maxInputs) {
+                    return; // No se puede agregar más inputs
+                }
+        
+                var html = '';
+                html += '<div id="inputFormRowTop">';
+                html += '<div class="input-group mb-3">';
+                html += '<div class="input-container">';
+                html += '<input type="text" name="cbarTop" pattern="[1-9]\\d*" class="form-control m-input" id="cbarTop" placeholder="Quantity of bars">';
+                html += '<select id="nbarTop" name="nbarTop" onchange="mostrarSeleccion()" class="form-control m-input">';
+                html += '<option value="barnum3">#3</option>';
+                html += '<option value="barnum4">#4</option>';
+                html += '<option value="barnum5">#5</option>';
+                html += '<option value="barnum6">#6</option>';
+                html += '<option value="barnum7">#7</option>';
+                html += '<option value="barnum8">#8</option>';
+                html += '</select>';
+                html += '<div class="input-group-append">';
+                html += '<button type="button" style="border: none; padding: 8px 12px; border-radius: 10px; background-color: #B44236; color:white;" class="btn btn-danger removeRowTop">Delete</button>';
+                html += '</div>';
+                html += '</div>';
+                html += '</div>';
+        
+                $('#newRowTop').append(html);
+            });
+        
+            // Borrar Input para barras Top
+            $(document).on('click', '.removeRowTop', function () {
+                $(this).closest('#inputFormRowTop').remove();
+                toggleGenerateButton();
+            });
+        });
+
+        $(document).ready(function() {
+            var maxInputs = 1; // Número máximo de inputs permitidos
+    
+            // Agregar Input para barras Bottom
+            $("#addRowBtt").click(function () {
+                var inputCount = $("#newRowBtt .input-group").length;
+        
+                if (inputCount >= maxInputs) {
+                    return; // No se puede agregar más inputs
+                }
+        
+                var html = '';
+                html += '<div id="inputFormRowBtt">';
+                html += '<div class="input-group mb-3">';
+                html += '<div class="input-container">';
+                html += '<input type="text" name="cbarBtt" pattern="[1-9]\\d*" class="form-control m-input" id="cbarBtt" placeholder="Quantity of bars">';
+                html += '<select id="nbarBtt" name="nbarBtt" onchange="mostrarSeleccion()" class="form-control m-input">';
+                html += '<option value="barnum3">#3</option>';
+                html += '<option value="barnum4">#4</option>';
+                html += '<option value="barnum5">#5</option>';
+                html += '<option value="barnum6">#6</option>';
+                html += '<option value="barnum7">#7</option>';
+                html += '<option value="barnum8">#8</option>';
+                html += '</select>';
+                html += '<div class="input-group-append">';
+                html += '<button type="button" style="border: none; padding: 8px 12px; border-radius: 10px; background-color: #B44236; color:white;" class="btn btn-danger removeRowBtt">Delete</button>';
+                html += '</div>';
+                html += '</div>';
+                html += '</div>';
+        
+                $('#newRowBtt').append(html);
+            });
+        
+            // Borrar Input para barras Bottom
+            $(document).on('click', '.removeRowBtt', function () {
+                $(this).closest('#inputFormRowBtt').remove();
+                toggleGenerateButton();
+            });
+
+            // Handle next step button click
+            $("#nextStep5").click(function () {
+                if (confirm("Once you proceed, you will not be able to modify the column section properties. Do you want to continue?")) {
+                    window.location.href = "/step4";
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
+{% endblock %}
